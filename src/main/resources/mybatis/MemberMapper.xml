@@ -6,7 +6,7 @@
 
 
     <!--总客数-->
-    <select id="getMemberList" resultMap="Gbm01">
+    <select id="getMemberList" resultType="Gbm01">
         select * from gbm01 where gba00c = #{compId}
     </select>
 

@@ -1,10 +1,7 @@
 package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.ListOperations;
-import org.springframework.data.redis.core.RedisOperations;
-import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -14,13 +11,13 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 public class RedisService {
-    @Resource
+    @Resource(name = "stringRedisTemplate")
     private HashOperations<String, String, String> hashOps;
-    @Resource
+    @Resource(name = "stringRedisTemplate")
     private RedisOperations<String, String> redisOps;
-    @Resource
+    @Resource(name = "stringRedisTemplate")
     private ValueOperations<String, String> valueOps;
-    @Resource
+    @Resource(name = "stringRedisTemplate")
     private ListOperations<String, String> listOps;
 
     public RedisService() {

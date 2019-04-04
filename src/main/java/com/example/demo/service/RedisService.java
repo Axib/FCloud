@@ -1,13 +1,15 @@
 package com.example.demo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.*;
-import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import javax.annotation.Resource;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.RedisOperations;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.stereotype.Component;
 
 @Component
 public class RedisService {
@@ -24,7 +26,7 @@ public class RedisService {
     }
 
     public String hget(String key, String field, int expire, TimeUnit timeUnit) {
-        if (expire > 0) {
+        if(expire > 0) {
             this.redisOps.expire(key, (long)expire, timeUnit);
         }
 
@@ -37,7 +39,7 @@ public class RedisService {
 
     public void hset(String key, String field, String val, int expire, TimeUnit timeUnit) {
         this.hashOps.put(key, field, val);
-        if (expire > 0) {
+        if(expire > 0) {
             this.redisOps.expire(key, (long)expire, timeUnit);
         }
 
@@ -52,7 +54,7 @@ public class RedisService {
     }
 
     public boolean hasKey(String key) {
-        return this.redisOps.hasKey(key);
+        return this.redisOps.hasKey(key).booleanValue();
     }
 
     public HashOperations<String, String, String> getHashOps() {

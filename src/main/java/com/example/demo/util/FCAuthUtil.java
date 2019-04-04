@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Component
 public class FCAuthUtil {
-    @Resource
+    @Resource(name = "stringRedisTemplate")
     private RedisTemplate<String, String> redisTemplate;
     /**
      * 验证提交数据连锁代码和redis中记录的登录信息是否一致

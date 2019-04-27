@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import com.example.demo.model.SendRedPack;
 import com.example.demo.util.XMLUtil;
-import jdk.nashorn.internal.objects.Global;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.net.ssl.SSLContext;
-import javax.xml.transform.Result;
 import java.io.*;
 import java.security.KeyStore;
 import java.text.SimpleDateFormat;

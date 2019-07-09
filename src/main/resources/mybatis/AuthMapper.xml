@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper.AuthMapper">
+    <resultMap id="FCMenuMap" type="FCMenu">
+        <id column="id"  property="id"></id>
+        <result column="menuName"  property="menuName"></result>
+        <result column="menuKey"  property="menuKey"></result>
+        <result column="normalUrl"  property="normalUrl"></result>
+        <result column="selectUrl"  property="selectUrl"></result>
+        <result column="parentId"  property="parentId"></result>
+        <result column="priority" property="priority"></result>
+        <collection property="children" ofType="FCMenu" column="{parentId=id}" select="getUserPrivilegeMenu"/>
+    </resultMap>
+
+    <!--获取权限菜单-->
+    <select id="getUserPrivilegeMenu" resultMap="FCMenuMap">
+        select * from FCMenu
+        <where>
+            <choose>
+                <when test='parentId != null and parentId != ""'>
+                    parentId = #{parentId}
+                </when>
+                <otherwise>
+                    ifnull(parentId, '') = ''
+                </otherwise>
+            </choose>
+        </where>
+        order by priority asc
+    </select>
+
+</mapper>

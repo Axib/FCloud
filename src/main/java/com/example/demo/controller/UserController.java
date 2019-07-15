@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.exception.CustomException;
 import com.example.demo.model.FCUser;
 import com.example.demo.model.ResultTO;
 import com.example.demo.service.UserService;
@@ -19,16 +20,19 @@ public class UserController {
     public ResultTO userLogin(@RequestBody FCUser login) throws Exception {
         ResultTO result = new ResultTO();
         if (login == null) {
-            throw new Exception("登录信息不能为空！");
+            throw new CustomException("登录信息不能为空！");
         }
         if (login.getUserName() == null || login.getUserName().isEmpty()) {
-            throw new Exception("登录用户名不能为空！");
+            throw new CustomException("登录用户名不能为空！");
         }
-        if (login.getPword() == null || login.getPword().isEmpty()) {
-            throw new Exception("登录密码不能为空！");
+        /*if (login.getPword() == null || login.getPword().isEmpty()) {
+            throw new CustomException("登录密码不能为空！");
+        }*/
+        FCUser user = userService.userLogin(login);
+        if (user == null) {
+            throw new CustomException("用户名或密码错误！");
         }
-
-        result.setResult(userService.userLogin(login));
+        result.setResult(user);
         return result;
     }
 }

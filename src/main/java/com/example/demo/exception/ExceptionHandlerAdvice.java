@@ -13,6 +13,7 @@ import java.io.StringWriter;
 
 @RestControllerAdvice(annotations = RestController.class)
 public class ExceptionHandlerAdvice {
+
     private Logger logger = LoggerFactory.getLogger(ExceptionHandlerAdvice.class);
 
     @ExceptionHandler(value = Exception.class)
@@ -42,15 +43,16 @@ public class ExceptionHandlerAdvice {
         return result;
     }
 
-    /*@ExceptionHandler(value = AuthException.class)
+    @ExceptionHandler(value = CustomException.class)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public ResultTO commonResponse(AuthException ce) {
+    public ResultTO commonResponse(CustomException ce) {
         ResultTO result = new ResultTO();
         result.setSuccess(false);
-        result.setCode(405);
+        result.setCode(ce.getCode());
         result.setMsg(ce.getMessage());
         LogUtil.info(ce.getMessage());
         return result;
-    }*/
+    }
+
 }

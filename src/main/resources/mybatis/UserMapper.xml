@@ -7,7 +7,7 @@
 
     <!--总客数-->
     <select id="userLogin" resultType="FCUser">
-        select * from FCUser where userName = #{login.userName} and password = MD5(#{login.pword})
+        select * from FCUser where userName = #{login.userName} and 'password' = MD5(#{login.pword})
     </select>
 
 

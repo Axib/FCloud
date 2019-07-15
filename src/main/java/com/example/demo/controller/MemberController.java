@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.annotation.AuthInfo;
+import com.example.demo.exception.CustomException;
 import com.example.demo.model.ResultTO;
 import com.example.demo.service.MemberService;
 import com.example.demo.util.FCAuthUtil;
@@ -26,7 +27,7 @@ public class MemberController {
     public ResultTO getMemberList(HttpServletRequest request,
                                   @PathVariable("compId") String compId) throws Exception {
         if (compId == null || compId.isEmpty()) {
-            throw new Exception("门店编号不能为空！");
+            throw new CustomException("门店编号不能为空！");
         }
         String userName = fcAuthUtil.getLoginInfo(request).getUserName();
         ResultTO result = new ResultTO();
